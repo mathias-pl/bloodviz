@@ -1,30 +1,37 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted, ref } from 'vue';
+
+const canvas = ref(null);
+
+onMounted(() => {
+  const ctx = canvas.value.getContext('2d');
+  ctx.fillStyle = 'white';
+  ctx.fillRect(125, 125, 250, 250);
+let x = 125;
+let dx = 2;
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+  ctx.fillStyle = 'white';
+  ctx.fillRect(x, 125, 250, 250);
+
+  if (x + 250 > canvas.value.width || x < 0) {
+    dx = -dx;
+  }
+
+  x += dx;
+  requestAnimationFrame(draw);
+}
+
+draw();
+});
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <h1>SpaceBox</h1>
+  <canvas ref="canvas" width="500" height="500"></canvas>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
