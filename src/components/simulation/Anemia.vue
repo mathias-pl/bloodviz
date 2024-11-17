@@ -1,17 +1,23 @@
 <template>
     <div class="simulation">
-        <h2>Raynaud's disease</h2>
-        <p style="width: 50%;">Raynaud’s disease causes small blood vessels in your fingers, toes, ears, or nose to
-            constrict much more than they should in response to stress or cold temperatures. This limits the blood flow
-            and therefore, the transportation of oxygen, which can turn these extremities blue or white and make them
-            feel numb.</p>
-        <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
+        <h2>Anemia</h2>
+        <p style="width: 50%;">Anemia occurs when there are not enough red blood cells or hemoglobin to transport
+            oxygen. This can cause
+            tiredness, lightheadedness, headaches, and weakness. Anemia can be mild or it could be a symptom of a larger
+            issue. </p>
+            <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
+            <button @click="setAnemia">Toggle anemia</button>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Raynaud',
+    name: 'Anemia',
+    data() {
+        return {
+            isAnemia: true
+        };
+    },
     mounted() {
         const canvas = document.getElementById('webglCanvas');
         canvas.width = window.innerWidth * 0.7;
@@ -23,8 +29,8 @@ export default {
         const r_rbc = 2;
         const r_wbc = 5;
         const horizontal_speed = 5;
-        const border_w = 130;
-        const plv = 0.75e-4; // Pressure, length, viscosity
+        const border_w = 15;
+        const plv = 1.25e-4; // Pressure, length, viscosity
         const r_sqrt = (canvas.height / 2 - border_w) ** 2;
         const min_speed = 1;
         const beat_per_l = 4;
@@ -34,6 +40,7 @@ export default {
             let r_from_center = (canvas.height / 2 - border_w) * Math.random();
             let side = Math.random() < 0.5 ? -1 : 1;
             let type = Math.random() < 0.55 ? 'yellow' : (Math.random() < 0.99 ? 'red' : 'white');
+            let tmp_x = Math.random() * canvas.width;
 
             particles.push({
                 x: Math.random() * canvas.width,
@@ -41,11 +48,12 @@ export default {
                 vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
                 vy: 0,
                 r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
+                anemia: Math.random() < 0.6 && type === 'red',
                 color: type,
             });
         }
 
-        function draw() {
+        const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw upper and lower edges
@@ -58,7 +66,9 @@ export default {
                 ctx.fillStyle = p.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
+                if (!(this.isAnemia && p.anemia)) {
+                    ctx.fill();
+                }
 
                 // Update particle position
                 p.x += p.vx;
@@ -78,6 +88,7 @@ export default {
                         vy: 0,
                         r: p.r,
                         color: p.color,
+                        anemia: p.anemia,
                     });
                 }
 
@@ -93,8 +104,13 @@ export default {
 
             requestAnimationFrame(draw);
         }
-
         draw();
+    },
+    methods: {
+        setAnemia() {
+            this.isAnemia = !this.isAnemia;
+            alert('Anemia is set to ' + this.isAnemia);
+        }
     }
 };
 </script>
@@ -108,12 +124,11 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
-
 .simulation h2 {
     margin-bottom: 0;
 }
-
 .simulation p {
     margin-top: 0;
 }

@@ -1,16 +1,14 @@
 <template>
     <div class="simulation">
         <h2>Healthy blood vessel</h2>
-        <p style="width: 50%;">Healthy blood vessels are flexible, strong, and elastic.
-            They are lined with a thin layer of cells called the endothelium.
-            The endothelium produces nitric oxide, a molecule that helps control blood pressure.
-            The endothelium also produces other molecules that help control blood clotting, immune
-            function, and the formation of new blood vessels.</p>
+        <p style="width: 50%;">Healthy blood vessels allow blood to flow easily. A healthy blood pressure is less than
+            120 mmHg systolic and 80 mmHg diastolic (120/80), but greater than 90/60. This simulation uses a blood
+            pressure of 120/80. Blood viscosity can change throughout the body and depending on the composition of the
+            blood. The viscosity of this vessel is modelled after the abdominal aorta with a value of 0.0035
+            Pascal-seconds. The maximum speed at the centre of the vessel has been scaled to be 5 pixels/second to be
+            visible to the human eye. The blood is composed of 55% plasma, 44% red blood cells, and 1% white blood
+            cells.</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
-        <p style="width: 50%;">Anemia occurs when there are not enough red blood cells or hemoglobin to transport oxygen. This can cause
-            tiredness, lightheadedness, headaches, and weakness. Anemia can be mild or it could be a symptom of a larger
-            issue. </p>
-        <button @click="setAnemia">Toggle anemia</button>
     </div>
 </template>
 
@@ -112,8 +110,8 @@ export default {
     },
     methods: {
         setAnemia() {
-            alert('Anemia is set to ' + this.isAnemia);
             this.isAnemia = !this.isAnemia;
+            alert('Anemia is set to ' + this.isAnemia);
         }
     }
 };
@@ -129,5 +127,13 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.simulation h2 {
+    margin-bottom: 0;
+}
+
+.simulation p {
+    margin-top: 0;
 }
 </style>

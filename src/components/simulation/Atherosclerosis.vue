@@ -5,8 +5,6 @@
             fats, cholesterol, and other components. Due to the decreased blood flow, atherosclerosis can lead to heart
             attacks or strokes. If a piece of plaque falls off the wall, it can also cause further problems.</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
-        <h3>Flow</h3>
-        <p style="width: 50%;">The blood flow is represented by the red particles.</p>
     </div>
 </template>
 
@@ -150,5 +148,13 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.simulation h2 {
+    margin-bottom: 0;
+}
+
+.simulation p {
+    margin-top: 0;
 }
 </style>
