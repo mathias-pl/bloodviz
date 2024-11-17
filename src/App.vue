@@ -14,6 +14,8 @@
       <button @click="$router.push('/about')">About</button>
     </div>
     <router-view></router-view>
+    <a href="https://www.hemaquebec.ca/en?gad_source=1" target="_blank"
+      style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);">Donate blood: Héma-Québec</a>
   </div>
 </template>
 
