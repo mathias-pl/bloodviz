@@ -15,11 +15,6 @@
 <script>
 export default {
     name: 'Healthy',
-    data() {
-        return {
-            isAnemia: false
-        };
-    },
     mounted() {
         const canvas = document.getElementById('webglCanvas');
         canvas.width = window.innerWidth * 0.7;
@@ -50,7 +45,6 @@ export default {
                 vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
                 vy: 0,
                 r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
-                anemia: Math.random() < 0.6 && type === 'red',
                 color: type,
             });
         }
@@ -68,9 +62,7 @@ export default {
                 ctx.fillStyle = p.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                if (!(this.isAnemia && p.anemia)) {
-                    ctx.fill();
-                }
+                ctx.fill();
 
                 // Update particle position
                 p.x += p.vx;
@@ -90,7 +82,6 @@ export default {
                         vy: 0,
                         r: p.r,
                         color: p.color,
-                        anemia: p.anemia,
                     });
                 }
 
@@ -107,12 +98,6 @@ export default {
             requestAnimationFrame(draw);
         }
         draw();
-    },
-    methods: {
-        setAnemia() {
-            this.isAnemia = !this.isAnemia;
-            alert('Anemia is set to ' + this.isAnemia);
-        }
     }
 };
 </script>

@@ -6,6 +6,7 @@
         <button @click="$router.push('/simulation/anemia')">Anemia</button>
         <button @click="$router.push('/simulation/atherosclerosis')">Atherosclerosis</button>
         <button @click="$router.push('/simulation/raynaud')">Raynaud's phenomenon</button>
+        <button @click="$router.push('/simulation/aneurysm')">Aneurysm</button>
     </div>
 </template>
 
