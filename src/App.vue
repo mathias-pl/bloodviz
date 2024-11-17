@@ -1,37 +1,33 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-
-const canvas = ref(null);
-
-onMounted(() => {
-  const ctx = canvas.value.getContext('2d');
-  ctx.fillStyle = 'white';
-  ctx.fillRect(125, 125, 250, 250);
-let x = 125;
-let dx = 2;
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-  ctx.fillStyle = 'white';
-  ctx.fillRect(x, 125, 250, 250);
-
-  if (x + 250 > canvas.value.width || x < 0) {
-    dx = -dx;
-  }
-
-  x += dx;
-  requestAnimationFrame(draw);
-}
-
-draw();
-});
 </script>
 
 <template>
-  <h1>SpaceBox</h1>
-  <canvas ref="canvas" width="500" height="500"></canvas>
+  <div id="main_menu">
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <img src="/logo.png" alt="Logo" style="height: 100px; margin-right: 20px;">
+      <h1>BloodViz</h1>
+    </div>
+    <p>Your best friend to understand blood vessels and the physics behind it</p>
+    <div style="display: flex; justify-content: center; margin-top: 15px;">
+      <button @click="$router.push('/simulation')" style="margin-right: 20px;">Simulation</button>
+      <button @click="$router.push('/sandbox')" style="margin-right: 20px;">Sandbox (beta)</button>
+      <button @click="$router.push('/about')">About</button>
+    </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style scoped>
-
+#main_menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
 </style>
