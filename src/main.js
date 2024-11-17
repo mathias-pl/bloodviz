@@ -3,8 +3,8 @@ import './style.css';
 import App from './App.vue';
 import Simulation from './components/Simulation.vue';
 import Healthy from './components/simulation/Healthy.vue';
-import Simulation2 from './components/simulation/Simulation2.vue';
-import Simulation3 from './components/simulation/Simulation3.vue';
+import Atherosclerosis from './components/simulation/Atherosclerosis.vue';
+import Raynayd from './components/simulation/Raynaud.vue';
 
 import Sandbox from './components/Sandbox.vue';
 import About from './components/About.vue';
@@ -14,8 +14,8 @@ const routes = [
     { path: '/', component: App },
     { path: '/simulation', component: Simulation },
     { path: '/simulation/healthy', component: Healthy },
-    { path: '/simulation/simulation2', component: Simulation2 },
-    { path: '/simulation/simulation3', component: Simulation3 },
+    { path: '/simulation/atherosclerosis', component: Atherosclerosis },
+    { path: '/simulation/raynaud', component: Raynayd },
     { path: '/sandbox', component: Sandbox },
     { path: '/about', component: About }
 ];

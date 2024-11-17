@@ -1,11 +1,7 @@
 <template>
     <div class="simulation">
-        <h2>Healthy blood vessel</h2>
-        <p style="width: 50%;">Healthy blood vessels are flexible, strong, and elastic. 
-        They are lined with a thin layer of cells called the endothelium. 
-        The endothelium produces nitric oxide, a molecule that helps control blood pressure. 
-        The endothelium also produces other molecules that help control blood clotting, immune 
-        function, and the formation of new blood vessels.</p>
+        <h2>Blood vessel with athrosclerosis</h2>
+        <p style="width: 50%;">TODO DESCRIBE THE DISEASE</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
         <h3>Flow</h3>
         <p style="width: 50%;">The blood flow is represented by the red particles.</p>
@@ -14,7 +10,7 @@
 
 <script>
 export default {
-    name: 'Simulation1',
+    name: 'Athrosclerosis',
     mounted() {
         const canvas = document.getElementById('webglCanvas');
         const ctx = canvas.getContext('2d');
@@ -28,33 +24,21 @@ export default {
         const plv = 1.25e-4; // Pressure, length, viscosity
         const r_sqrt = (canvas.height / 2 - border_w) ** 2;
         const min_speed = 1;
-        const beat_per_l = 4;
         const particles = [];
 
-        for (let i = 0; i < n / beat_per_l; i++) {
+        for (let i = 0; i < n; i++) {
             let r_from_center = (canvas.height / 2 - border_w) * Math.random();
             let side = Math.random() < 0.5 ? -1 : 1;
             let type = Math.random() < 0.55 ? 'yellow' : (Math.random() < 0.99 ? 'red' : 'white');
-            
-            // particles.push({
-            //     x: Math.random() * canvas.width,
-            //     y: canvas.height / 2 + r_from_center * side,
-            //     vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
-            //     vy: 0,
-            //     r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
-            //     color: type,
-            // });
 
-            for (let j = 0; j < beat_per_l; j++) {
-                particles.push({
-                    x: (Math.random() * canvas.width / 4) + (Math.sin(Math.random() + 0.2) * j * canvas.width / 4),
-                    y: canvas.height / 2 + r_from_center * side,
-                    vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
-                    vy: 0,
-                    r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
-                    color: type,
-                });
-            }
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: canvas.height / 2 + r_from_center * side,
+                vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
+                vy: 0,
+                r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
+                color: type,
+            });
         }
 
         function draw() {
