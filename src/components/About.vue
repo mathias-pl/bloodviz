@@ -10,18 +10,22 @@
             blood vessels and see how the blood flows through them. We hope you enjoy this project!</p>
         <h2>The team</h2>
         <div style="display: flex; align-items: center; width: 50%; margin-bottom: 20px;">
-            <img src="../assets/mathias.png" alt="Mathias Pacheco Lemina" style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
+            <img src="../assets/mathias.png" alt="Mathias Pacheco Lemina"
+                style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
             <p><strong>Mathias Pacheco Lemina</strong> is a Computer Engineering student at McGill University.
                 His main interests are robotics, embedded systems, data analysis and simulations.
-                Outside of his studies, he enjoys soccer, running, photography, entrepreneurship, and annoying Bethany.</p>
-        </div>
-        <div style="display: flex; align-items: center; width: 50%; margin-bottom: 20px;">
-            <img src="../assets/bethany.jpg" alt="Bethany Walton-Knight" style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
-            <p><strong>Bethany Walton-Knight</strong> is a Physics student at McGill University.
-            Her main interests are solar system dynamics and data analysis.
-            Outside of her studies, she enjoys track & field, reading, singing, cooking, and annoying Mathias.
+                Outside of his studies, he enjoys soccer, running, photography, entrepreneurship, and annoying Bethany.
             </p>
         </div>
+        <div style="display: flex; align-items: center; width: 50%; margin-bottom: 20px;">
+            <img src="../assets/bethany.jpg" alt="Bethany Walton-Knight"
+                style="border-radius: 50%; width: 100px; height: 100px; margin-right: 20px;">
+            <p><strong>Bethany Walton-Knight</strong> is a Physics student at McGill University.
+                Her main interests are solar system dynamics and data analysis.
+                Outside of her studies, she enjoys track & field, reading, singing, cooking, and annoying Mathias.
+            </p>
+        </div>
+        <a href="https://www.hemaquebec.ca/en?gad_source=1" target="_blank">Donate blood: Héma-Québec</a>
     </div>
 </template>
 
