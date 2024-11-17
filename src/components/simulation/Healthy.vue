@@ -7,19 +7,26 @@
         The endothelium also produces other molecules that help control blood clotting, immune 
         function, and the formation of new blood vessels.</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
-        <h3>Flow</h3>
-        <p style="width: 50%;">The blood flow is represented by the red particles.</p>
+        <p>ANEMIA TODO</p>
+        <button @click="setAnemia">Toggle anemia</button>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Simulation1',
+    name: 'Healthy',
+    data() {
+        return {
+            isAnemia: false
+        };
+    },
     mounted() {
         const canvas = document.getElementById('webglCanvas');
+        canvas.width = window.innerWidth * 0.7;
+        canvas.height = window.innerHeight * 0.4;
         const ctx = canvas.getContext('2d');
 
-        const n = 4000; // Number of particles
+        const n = 10000; // Number of particles
         const r_plasma = 1;
         const r_rbc = 2;
         const r_wbc = 5;
@@ -38,16 +45,17 @@ export default {
             let tmp_x = Math.random() * canvas.width;
             
             particles.push({
-                x: tmp_x,
+                x: Math.random() * canvas.width,
                 y: canvas.height / 2 + r_from_center * side,
                 vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
                 vy: 0,
                 r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
+                anemia: Math.random() < 0.6 && type === 'red',
                 color: type,
             });
         }
 
-        function draw() {
+        const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // Draw upper and lower edges
@@ -60,7 +68,9 @@ export default {
                 ctx.fillStyle = p.color;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
+                if (!(this.isAnemia && p.anemia)) {
+                    ctx.fill();
+                }
 
                 // Update particle position
                 p.x += p.vx;
@@ -78,6 +88,9 @@ export default {
                         y: canvas.height / 2 + r_from_center * side,
                         vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
                         vy: 0,
+                        r: p.r,
+                        color: p.color,
+                        anemia: p.anemia,
                     });
                 }
 
@@ -93,8 +106,13 @@ export default {
 
             requestAnimationFrame(draw);
         }
-
         draw();
+    },
+    methods: {
+        setAnemia() {
+            alert('Anemia is set to ' + this.isAnemia);
+            this.isAnemia = !this.isAnemia;
+        }
     }
 };
 </script>
@@ -108,5 +126,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 </style>

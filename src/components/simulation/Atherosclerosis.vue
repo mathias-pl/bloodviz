@@ -1,7 +1,9 @@
 <template>
     <div class="simulation">
         <h2>Blood vessel with athrosclerosis</h2>
-        <p style="width: 50%;">TODO DESCRIBE THE DISEASE</p>
+        <p style="width: 50%;">Atherosclerosis is the buildup of plaque on the walls of arteries. Plaque can be made of
+            fats, cholesterol, and other components. Due to the decreased blood flow, atherosclerosis can lead to heart
+            attacks or strokes. If a piece of plaque falls off the wall, it can also cause further problems.</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
         <h3>Flow</h3>
         <p style="width: 50%;">The blood flow is represented by the red particles.</p>
@@ -13,26 +15,29 @@ export default {
     name: 'Athrosclerosis',
     data() {
         return {
-            n: 5000, // Number of particles
+            n: 10000, // Number of particles
             r_plasma: 1,
             r_rbc: 2,
             r_wbc: 5,
-            r_obstacle: 150,
             horizontal_speed: 5,
             inelastic_collision: 0.7,
             border_w: 15,
             plv: 1.25e-4, // Pressure, length, viscosity
             min_speed: 1,
             particles: [],
-            obstacles: [
-                { x: 250, y: 0 },
-                { x: 750, y: 400 }
-            ]
         };
     },
     mounted() {
         const canvas = document.getElementById('webglCanvas');
+        canvas.width = window.innerWidth * 0.7;
+        canvas.height = window.innerHeight * 0.4;
         const ctx = canvas.getContext('2d');
+        const r_obstacle = 3 * canvas.height / 8;
+        const obstacles = [
+            { x: canvas.width / 4, y: 0 },
+            { x: 3 * canvas.width / 4, y: canvas.height }
+        ];
+
         const r_sqrt = (canvas.height / 2 - this.border_w) ** 2;
 
         for (let i = 0; i < this.n; i++) {
@@ -59,10 +64,10 @@ export default {
             ctx.fillRect(0, canvas.height - this.border_w, canvas.width, this.border_w); // Lower edge
             
             // Draw obstacles
-            this.obstacles.forEach(obstacle => {
+            obstacles.forEach(obstacle => {
                 ctx.fillStyle = 'gray';
                 ctx.beginPath();
-                ctx.arc(obstacle.x, obstacle.y, this.r_obstacle, 0, Math.PI * 2);
+                ctx.arc(obstacle.x, obstacle.y, r_obstacle, 0, Math.PI * 2);
                 ctx.fill();
             });
 
@@ -94,8 +99,9 @@ export default {
                 }
 
                 // Check for collisions with obstacles
-                if (p.y > canvas.height - this.r_obstacle || p.y < this.r_obstacle) {
-                    this.obstacles.forEach(obstacle => this.checkCollision(obstacle, p, true));
+                if (p.y > canvas.height - r_obstacle || p.y < r_obstacle) {
+                    // alert('Game over!');
+                    obstacles.forEach(obstacle => this.checkCollision(obstacle, p, true, canvas));
                 }
             });
 
@@ -105,12 +111,13 @@ export default {
         draw();
     },
     methods: {
-        checkCollision(obstacle, particle, first) {
+        checkCollision(obstacle, particle, first, canvas) {
             const dx = particle.x - obstacle.x;
             const dy = particle.y - obstacle.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < this.r_obstacle + particle.r) {
+            const r_obs = 3 * (canvas.height / 8);
+            
+            if (distance < r_obs + particle.r) {
                 // Simple elastic collision response
                 const angle = Math.atan2(dy, dx);
 
@@ -121,8 +128,8 @@ export default {
 
                 particle.y += particle.vy;
 
-                while (this.checkCollision(obstacle, particle, false)) {
-                    // particle.y += particle.vy;
+                while (this.checkCollision(obstacle, particle, false, canvas)) {
+                    particle.y += particle.vy;
                 }
 
                 return true;
