@@ -31,30 +31,20 @@ export default {
         const beat_per_l = 4;
         const particles = [];
 
-        for (let i = 0; i < n / beat_per_l; i++) {
+        for (let i = 0; i < n; i++) {
             let r_from_center = (canvas.height / 2 - border_w) * Math.random();
             let side = Math.random() < 0.5 ? -1 : 1;
             let type = Math.random() < 0.55 ? 'yellow' : (Math.random() < 0.99 ? 'red' : 'white');
+            let tmp_x = Math.random() * canvas.width;
             
-            // particles.push({
-            //     x: Math.random() * canvas.width,
-            //     y: canvas.height / 2 + r_from_center * side,
-            //     vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
-            //     vy: 0,
-            //     r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
-            //     color: type,
-            // });
-
-            for (let j = 0; j < beat_per_l; j++) {
-                particles.push({
-                    x: (Math.random() * canvas.width / 4) + (Math.sin(Math.random() + 0.2) * j * canvas.width / 4),
-                    y: canvas.height / 2 + r_from_center * side,
-                    vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
-                    vy: 0,
-                    r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
-                    color: type,
-                });
-            }
+            particles.push({
+                x: tmp_x,
+                y: canvas.height / 2 + r_from_center * side,
+                vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
+                vy: 0,
+                r: type === 'yellow' ? r_plasma : (type === 'red' ? r_rbc : r_wbc),
+                color: type,
+            });
         }
 
         function draw() {
