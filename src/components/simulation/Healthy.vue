@@ -1,13 +1,15 @@
 <template>
     <div class="simulation">
         <h2>Healthy blood vessel</h2>
-        <p style="width: 50%;">Healthy blood vessels are flexible, strong, and elastic. 
-        They are lined with a thin layer of cells called the endothelium. 
-        The endothelium produces nitric oxide, a molecule that helps control blood pressure. 
-        The endothelium also produces other molecules that help control blood clotting, immune 
-        function, and the formation of new blood vessels.</p>
+        <p style="width: 50%;">Healthy blood vessels are flexible, strong, and elastic.
+            They are lined with a thin layer of cells called the endothelium.
+            The endothelium produces nitric oxide, a molecule that helps control blood pressure.
+            The endothelium also produces other molecules that help control blood clotting, immune
+            function, and the formation of new blood vessels.</p>
         <canvas id="webglCanvas" width="1000px" height="400px"></canvas>
-        <p>ANEMIA TODO</p>
+        <p style="width: 50%;">Anemia occurs when there are not enough red blood cells or hemoglobin to transport oxygen. This can cause
+            tiredness, lightheadedness, headaches, and weakness. Anemia can be mild or it could be a symptom of a larger
+            issue. </p>
         <button @click="setAnemia">Toggle anemia</button>
     </div>
 </template>
@@ -84,7 +86,7 @@ export default {
                     let side = Math.random() < 0.5 ? -1 : 1;
 
                     particles.splice(particles.indexOf(p), 1, {
-                        x: r,
+                        x: p.r,
                         y: canvas.height / 2 + r_from_center * side,
                         vx: plv * (r_sqrt - r_from_center ** 2) + min_speed,
                         vy: 0,

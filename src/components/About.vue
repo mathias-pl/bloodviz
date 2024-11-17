@@ -11,10 +11,10 @@
         <h2>The team</h2>
         <p style="width: 50%;"><strong>Mathias Pacheco Lemina</strong> is a Computer Engineering student at McGill University.
             His main interests are robotics, embedded systems, data analysis and simulations.
-            Aside of his studies, he enjoys soccer, running, photography and entrepreneurship.</p>
+            Outside of his studies, he enjoys soccer, running, photography, entrepreneurship, and annoying Bethany.</p>
         <p style="width: 50%;"><strong>Bethany Walton-Knight</strong> is a Physics student at McGill University.
-            Her main interests are TODO.
-            Aside of her studies, she enjoys TODO.
+            Her main interests are solar system dynamics and data analysis.
+            Outside of her studies, she enjoys track & field, reading, singing, cooking, and annoying Mathias.
         </p>
     </div>
 </template>
